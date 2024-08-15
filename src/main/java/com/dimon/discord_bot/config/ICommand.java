@@ -1,5 +1,6 @@
 package com.dimon.discord_bot.config;
 
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
@@ -10,4 +11,5 @@ public interface ICommand {
     String getDescription();
     List<OptionData> getOptions();
     void execute(SlashCommandInteraction event);
+    void execute(MessageReceivedEvent event);
 }

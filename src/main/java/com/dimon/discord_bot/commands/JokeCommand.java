@@ -3,6 +3,7 @@ package com.dimon.discord_bot.commands;
 import com.dimon.discord_bot.config.ICommand;
 import com.dimon.discord_bot.model.Joke;
 import com.dimon.discord_bot.repository.JokeRepository;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class JokeCommand implements ICommand {
 
     @Override
     public String getDescription() {
-        return "Sends a random joke from the database.";
+        return "Add a joke either by typing it or by uploading a text file.";
     }
 
     @Override
@@ -44,4 +45,7 @@ public class JokeCommand implements ICommand {
             event.reply("Sorry, I couldn't find any jokes.").queue();
         }
     }
+
+    @Override
+    public void execute(MessageReceivedEvent event) {}
 }

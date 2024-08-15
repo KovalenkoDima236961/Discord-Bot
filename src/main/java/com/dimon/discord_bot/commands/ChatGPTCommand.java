@@ -1,6 +1,7 @@
 package com.dimon.discord_bot.commands;
 
 import com.dimon.discord_bot.config.ICommand;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
@@ -30,6 +31,7 @@ public class ChatGPTCommand implements ICommand {
         return null;
     }
 
+
     @Override
     public void execute(SlashCommandInteraction event) {
         TextInput query = TextInput.create("query-field", "Query", TextInputStyle.PARAGRAPH)
@@ -42,4 +44,7 @@ public class ChatGPTCommand implements ICommand {
                 .build();
         event.replyModal(modal).queue();
     }
+
+    @Override
+    public void execute(MessageReceivedEvent event) {}
 }

@@ -21,4 +21,8 @@ public class Joke {
     private Long id;
 
     private String content;
+
+    public Joke(String content) {
+        this.content = content;
+    }
 }
