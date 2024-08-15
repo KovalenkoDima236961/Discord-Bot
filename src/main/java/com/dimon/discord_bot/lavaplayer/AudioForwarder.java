@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
-@Component
+
 public class AudioForwarder implements AudioSendHandler {
 
     private final AudioPlayer player;

@@ -19,7 +19,7 @@ public class DiscordBotApplication {
     }
 
     @Bean
-    public CommandLineRunner runBot(CommandManager commandManager, JokeCommand jokeCommand, ChatGPTCommand chatGPTCommand, AddJokeCommand addJokeCommand, PlayCommand playCommand, NowPlayingCommand nowPlayingCommand, QueueCommand queueCommand, RepeatCommand repeatCommand, SkipCommand skipCommand, StopCommand stopCommand) {
+    public CommandLineRunner runBot(CommandManager commandManager, JokeCommand jokeCommand, ChatGPTCommand chatGPTCommand, AddJokeCommand addJokeCommand, PlayCommand playCommand, NowPlayingCommand nowPlayingCommand, QueueCommand queueCommand, WeatherCommand weatherCommand,RepeatCommand repeatCommand, SkipCommand skipCommand, StopCommand stopCommand) {
         return args -> {
             Dotenv dotenv = Dotenv.load();
             String token = dotenv.get("TOKEN");
@@ -34,6 +34,7 @@ public class DiscordBotApplication {
             commandManager.add(queueCommand);
             commandManager.add(repeatCommand);
             commandManager.add(skipCommand);
+            commandManager.add(weatherCommand);
             commandManager.add(stopCommand);
             jda.addEventListener(new Listeners());
             jda.addEventListener(commandManager);
