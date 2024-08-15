@@ -1,8 +1,6 @@
 package com.dimon.discord_bot;
 
-import com.dimon.discord_bot.commands.AddJokeCommand;
-import com.dimon.discord_bot.commands.ChatGPTCommand;
-import com.dimon.discord_bot.commands.JokeCommand;
+import com.dimon.discord_bot.commands.*;
 import com.dimon.discord_bot.config.CommandManager;
 import com.dimon.discord_bot.config.Listeners;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -21,7 +19,7 @@ public class DiscordBotApplication {
     }
 
     @Bean
-    public CommandLineRunner runBot(CommandManager commandManager, JokeCommand jokeCommand, ChatGPTCommand chatGPTCommand, AddJokeCommand addJokeCommand) {
+    public CommandLineRunner runBot(CommandManager commandManager, JokeCommand jokeCommand, ChatGPTCommand chatGPTCommand, AddJokeCommand addJokeCommand, PlayCommand playCommand, NowPlayingCommand nowPlayingCommand, QueueCommand queueCommand, RepeatCommand repeatCommand, SkipCommand skipCommand, StopCommand stopCommand) {
         return args -> {
             Dotenv dotenv = Dotenv.load();
             String token = dotenv.get("TOKEN");
@@ -31,6 +29,12 @@ public class DiscordBotApplication {
             commandManager.add(jokeCommand);
             commandManager.add(chatGPTCommand);
             commandManager.add(addJokeCommand);
+            commandManager.add(playCommand);
+            commandManager.add(nowPlayingCommand);
+            commandManager.add(queueCommand);
+            commandManager.add(repeatCommand);
+            commandManager.add(skipCommand);
+            commandManager.add(stopCommand);
             jda.addEventListener(new Listeners());
             jda.addEventListener(commandManager);
 

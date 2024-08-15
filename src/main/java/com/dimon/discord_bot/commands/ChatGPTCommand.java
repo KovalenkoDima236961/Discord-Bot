@@ -1,6 +1,7 @@
 package com.dimon.discord_bot.commands;
 
 import com.dimon.discord_bot.config.ICommand;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -33,7 +34,7 @@ public class ChatGPTCommand implements ICommand {
 
 
     @Override
-    public void execute(SlashCommandInteraction event) {
+    public void execute(SlashCommandInteractionEvent event) {
         TextInput query = TextInput.create("query-field", "Query", TextInputStyle.PARAGRAPH)
                 .setRequired(true)
                 .setMinLength(1)

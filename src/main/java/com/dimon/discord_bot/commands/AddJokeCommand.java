@@ -50,7 +50,7 @@ public class AddJokeCommand implements ICommand {
     }
 
     @Override
-    public void execute(SlashCommandInteraction event) {
+    public void execute(SlashCommandInteractionEvent event) {
         OptionMapping jokeOption = event.getOption("joke");
         if (jokeOption != null) {
             String jokeValue = jokeOption.getAsString();

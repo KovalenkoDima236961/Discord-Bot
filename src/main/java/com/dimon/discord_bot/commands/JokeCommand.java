@@ -3,6 +3,7 @@ package com.dimon.discord_bot.commands;
 import com.dimon.discord_bot.config.ICommand;
 import com.dimon.discord_bot.model.Joke;
 import com.dimon.discord_bot.repository.JokeRepository;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -37,7 +38,7 @@ public class JokeCommand implements ICommand {
     }
 
     @Override
-    public void execute(SlashCommandInteraction event) {
+    public void execute(SlashCommandInteractionEvent event) {
         Joke joke = jokeRepository.findRandomJoke();
         if (joke != null) {
             event.reply(joke.getContent()).queue();
