@@ -84,6 +84,6 @@ OPENAI_API_KEY=your-openapi-api-key</code></pre>
     <h2>Contact</h2>
 <p>For any questions, issues, or suggestions, please contact:</p>
     <ul>
-        <li><strong>Your Name:</strong> <a href="mailto:kovalenkodima581@gmail.com">kovalenkodima581@gmail.com</a></li>
+        <li><strong>Kovalenko Dmytro:</strong> <a href="mailto:kovalenkodima581@gmail.com">kovalenkodima581@gmail.com</a></li>
     </ul>
 
