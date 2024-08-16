@@ -59,3 +59,31 @@ OPENAI_API_KEY=your-openapi-api-key</code></pre>
             </ul>
         </li>
     </ul>
+<h3>Examples</h3>
+    <p><strong>Checking the weather:</strong></p>
+    <div class="code-block">
+        <pre><code>/weather London</code></pre>
+    </div>
+<p>This command will display the current weather in London.</p>
+    <p><strong>Playing a song:</strong></p>
+    <div class="code-block">
+        <pre><code>/play Never Gonna Give You Up</code></pre>
+    </div>
+<p>This command will search for the song on YouTube and play it in your voice channel.</p>
+    <h2>Contributing</h2>
+<p>Contributions are welcome! If you'd like to contribute, please fork the repository and use a feature branch. Pull requests are warmly welcome.</p>
+    <ol>
+<li>Fork the repository.</li>
+<li>Create a feature branch.</li>
+<li>Commit your changes.</li>
+<li>Push your changes to your feature branch.</li>
+<li>Create a pull request.</li>
+    </ol>
+    <h2>License</h2>
+<p>This project is licensed under the MIT License. See the <a href="LICENSE" target="_blank">LICENSE</a> file for more details.</p>
+    <h2>Contact</h2>
+<p>For any questions, issues, or suggestions, please contact:</p>
+    <ul>
+        <li><strong>Your Name:</strong> <a href="mailto:kovalenkodima581@gmail.com">kovalenkodima581@gmail.com</a></li>
+    </ul>
+
