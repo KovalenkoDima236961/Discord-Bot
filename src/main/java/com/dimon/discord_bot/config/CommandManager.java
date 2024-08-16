@@ -2,6 +2,7 @@ package com.dimon.discord_bot.config;
 
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -48,6 +49,19 @@ public class CommandManager extends ListenerAdapter {
             }
         }
     }
+
+    @Override
+    public void onButtonInteraction(@NotNull ButtonInteractionEvent event) {
+        String buttonId = event.getButton().getId();
+        for (ICommand command : commands) {
+            if (command.getName().equals(buttonId)) {
+                command.execute(event); // Pass the event to the command for handling
+                return;
+            }
+        }
+        event.reply("Unknown command or button interaction.").setEphemeral(true).queue();
+    }
+
 
     public void add(ICommand command) {
         commands.add(command);

@@ -4,6 +4,7 @@ import com.dimon.discord_bot.config.ICommand;
 import com.dimon.discord_bot.model.Joke;
 import com.dimon.discord_bot.repository.JokeRepository;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.interactions.commands.SlashCommandInteraction;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -39,11 +40,28 @@ public class JokeCommand implements ICommand {
 
     @Override
     public void execute(SlashCommandInteractionEvent event) {
+        displayJoke(event);
+    }
+
+    @Override
+    public void execute(ButtonInteractionEvent event) {
+        displayJoke(event);
+    }
+
+    private void displayJoke(Object event) {
         Joke joke = jokeRepository.findRandomJoke();
         if (joke != null) {
-            event.reply(joke.getContent()).queue();
+            reply(event, joke.getContent());
         } else {
-            event.reply("Sorry, I couldn't find any jokes.").queue();
+            reply(event, "Sorry, I couldn't find any jokes.");
+        }
+    }
+
+    private void reply(Object event, String message) {
+        if (event instanceof SlashCommandInteractionEvent) {
+            ((SlashCommandInteractionEvent) event).reply(message).queue();
+        } else if (event instanceof ButtonInteractionEvent) {
+            ((ButtonInteractionEvent) event).reply(message).queue();
         }
     }
 
