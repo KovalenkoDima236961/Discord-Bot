@@ -11,4 +11,5 @@ import java.util.UUID;
 @Repository
 public interface LobbyRepository extends JpaRepository<LobbyEntity, Long> {
     Optional<LobbyEntity> findByLobbyId(UUID lobbyId);
+    Optional<LobbyEntity> findByCreatorId(Long id);
 }
