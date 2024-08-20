@@ -10,6 +10,8 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class Listeners extends ListenerAdapter {
@@ -18,20 +20,67 @@ public class Listeners extends ListenerAdapter {
 
     @Override
     public void onModalInteraction(@NotNull ModalInteractionEvent event) {
-        if (event.getModalId().equals("chatgpt_modal")) {
-            String query = event.getValue("query-field").getAsString();
-            System.out.println("Received query: " + query);
+        String modalId = event.getModalId();
 
-            event.deferReply().queue();  // Defer the reply to give time for the API request
-
-            try {
-                String response = getChatGPTResponse(query);
-                event.getHook().sendMessage(response).queue();
-            } catch (IOException e) {
-                event.getHook().sendMessage("An error occurred while contacting ChatGPT: " + e.getMessage()).queue();
-                e.printStackTrace();
-            }
+        switch (modalId) {
+            case "chatgpt_modal":
+                handleChatGPTModal(event);
+                break;
+            case "genre_input_modal":
+                handleGenreInputModal(event);
+                break;
+            case "year_input_modal":
+                handleYearInputModal(event);
+                break;
+            case "author_input_modal":
+                handleAuthorInputModal(event);
+                break;
+            default:
+                event.reply("Unknown modal interaction.").setEphemeral(true).queue();
+                break;
         }
+    }
+
+    private void handleChatGPTModal(ModalInteractionEvent event) {
+        String query = event.getValue("query-field").getAsString();
+        System.out.println("Received query: " + query);
+
+        event.deferReply().queue();  // Defer the reply to give time for the API request
+
+        try {
+            String response = getChatGPTResponse(query);
+            event.getHook().sendMessage(response).queue();
+        } catch (IOException e) {
+            event.getHook().sendMessage("An error occurred while contacting ChatGPT: " + e.getMessage()).queue();
+            e.printStackTrace();
+        }
+    }
+
+    private void handleGenreInputModal(ModalInteractionEvent event) {
+        String genre = event.getValue("genre").getAsString();
+        System.out.println("Received genre: " + genre);
+
+        // Implement your logic here to handle genre-based film search
+        String films = getFilmsByGenre(genre);
+        event.reply("Films in the genre '" + genre + "':\n" + films).queue();
+    }
+
+    private void handleYearInputModal(ModalInteractionEvent event) {
+        String year = event.getValue("year").getAsString();
+        System.out.println("Received year: " + year);
+
+        // Implement your logic here to handle year-based film search
+        String films = getFilmsByYear(year);
+        event.reply("Films from the year '" + year + "':\n" + films).queue();
+    }
+
+    private void handleAuthorInputModal(ModalInteractionEvent event) {
+        String author = event.getValue("author").getAsString();
+        System.out.println("Received author: " + author);
+
+        // Implement your logic here to handle author-based film search
+        String films = getFilmsByAuthor(author);
+        event.reply("Films by author '" + author + "':\n" + films).queue();
     }
 
     private String getChatGPTResponse(String query) throws IOException {
@@ -99,6 +148,23 @@ public class Listeners extends ListenerAdapter {
         } else {
             throw new IOException("Unexpected response structure: " + responseData);
         }
+    }
+
+
+    private String getFilmsByGenre(String genre) {
+        List<String> films = new ArrayList<>();
+
+        return "Film 1, Film 2, Film 3"; // Example response
+    }
+
+    private String getFilmsByYear(String year) {
+        // Implement your API call or database query here
+        return "Film A, Film B, Film C"; // Example response
+    }
+
+    private String getFilmsByAuthor(String author) {
+        // Implement your API call or database query here
+        return "Film X, Film Y, Film Z"; // Example response
     }
 
 }
